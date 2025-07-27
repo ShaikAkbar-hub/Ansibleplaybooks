@@ -15,8 +15,16 @@
       service:
         name: apache2 
         state: restarted
+    - name: pausing the server for 30 sec
+      pause:
+        seconds: 20
     - name: checking whether the servers reaching or not 
       uri:
-        url: http://54.196.192.238
+        url: http://54.146.202.143
         status_code: 200
-...  
+    - name: checking the other server
+      uri: 
+        url: http://3.85.234.12
+        status_code: 200
+
+... 

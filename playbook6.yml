@@ -1,0 +1,15 @@
+---
+- name: install or uninstall the software apps
+  hosts: all
+  vars:
+    a: tomcat10
+    b: present
+    c: yes
+  tasks:
+    - name: install the software
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...
+    
