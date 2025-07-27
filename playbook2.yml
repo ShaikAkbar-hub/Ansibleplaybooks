@@ -1,0 +1,13 @@
+---
+- name: creation of file over the another servers
+  hosts: all
+  tasks:
+    - name: file creation
+      file:
+        name: /tmp/myinventory
+        state: touch
+        owner: root
+        group: ubuntu
+        mode: 740 
+...
+

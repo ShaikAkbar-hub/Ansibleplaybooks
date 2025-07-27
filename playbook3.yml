@@ -1,0 +1,32 @@
+---
+- name: Performing copy operation and installation of tomcat10 server and replacing port number and checking the application running on other servers as well
+  hosts: all
+  tasks:
+    - name: doing copy operation
+      copy:
+        src: /tmp/human
+        dest: /tmp
+
+    - name: installation of tomcat10
+      apt: 
+        name: tomcat10
+        state: present
+        update_cache: yes
+     
+    - name: Performing replacemnt of data in tomcat10
+      replace: 
+        regexp: 8080
+        replace: 9090
+        path: /etc/tomcat10/server.xml 
+    
+    - name: Doing service restart operation
+      service:
+        name: tomcat10
+        state: restarted
+    
+    - name: checking the hosts are able to communicate with other url or not
+      uri:
+        url: 'http://google.com'
+        status_code: 200
+
+... 

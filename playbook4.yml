@@ -1,0 +1,22 @@
+---
+- name: Configuring apache server
+  hosts: all
+  tasks: 
+    - name: installing apache server
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: changing the content of ubuntu page
+      copy:
+        content: "Having Headache"
+        dest: /var/www/html/index.html
+    - name: Restart the server
+      service:
+        name: apache2 
+        state: restarted
+    - name: checking whether the servers reaching or not 
+      uri:
+        url: http://54.196.192.238
+        status_code: 200
+...  
