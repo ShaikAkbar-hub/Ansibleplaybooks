@@ -1,0 +1,22 @@
+---
+- name: installing the git software using when condition of ansible
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks: 
+    - name: installing the git
+      apt:
+       name: git 
+       state: present
+       update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+    - name: installing the git on redhat
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "RedHat"
+...
+
+
+
