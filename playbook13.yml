@@ -1,0 +1,23 @@
+---
+- name: creating user and file and copy the file
+  hosts: all
+  tasks: 
+    - name: create user
+      user:
+        name: arif
+        password: baign
+        home: /home/arif
+      tags: user_creation
+    - name: create file
+      file:
+        name: /tmp/file
+        state: touch
+        owner: arif
+        group: ubuntu
+        mode: 740
+      tags: file_creation
+    - name: copy file
+      copy:
+        src: /etc/passwd
+        dest: /home/arif
+...
