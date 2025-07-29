@@ -1,0 +1,11 @@
+---
+- name: working with the child playbooks
+  hosts: all
+  tasks: 
+    - name: configuring
+      include_tasks: "{{item}}"
+      with_items:
+        - child1.yml
+        - child2.yml
+        - child3.yml
+... 

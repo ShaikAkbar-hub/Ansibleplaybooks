@@ -1,0 +1,6 @@
+---
+- name: Downloading the jenkins file 
+  get_url: 
+    url: https://get.jenkins.io/war-stable/2.516.1/jenkins.war 
+    dest: /tmp
+...

@@ -1,0 +1,22 @@
+---
+- name: implementing the handlers
+  hosts: all
+  tasks:
+    - name: install the apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: overwrite/replace the index.html file
+      copy: 
+        content: "Wellcome to baigna burrta"
+        dest: /var/www/html/index.html
+      notify: Restart the apache2
+  handlers:
+    - name: Restart the apache2
+      service:
+        name: apache2
+        state: restarted
+...
+
+

@@ -1,0 +1,7 @@
+---
+- name: install tomcat10 on all servers
+  apt: 
+    name: tomcat10
+    state: present
+    update_cache: yes
+...

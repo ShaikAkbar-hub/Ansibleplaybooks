@@ -1,0 +1,12 @@
+---
+- name: configuring apache software
+  hosts: 172.31.26.44
+  tasks:
+    - name: installing apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+... 
+
+

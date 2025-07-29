@@ -1,0 +1,40 @@
+---
+- name: creating the playbook which configures jenkins server group
+  hosts: jenkins
+  tasks:
+    - name: install jenkins on all the servers
+      apt:
+        name: "{{item.a}}"
+        state: "{{item.b}}"
+        update_cache: "{{item.c}}"
+      with_items:
+        - {a: git,b: present,c: yes}
+        - {a: maven,b: present,c: yes}
+        - {a: openjdk-17-jdk,b: present,c: yes}
+    - name: install the main jenkinsfile
+      get_url:
+        url: https://get.jenkins.io/war-stable/2.516.1/jenkins.war
+        dest: /home/ubuntu
+- name: set up tomcat servers
+  hosts: servers
+  tasks:
+    - name: install the tomcat10 and tomcat10-admin
+      apt:
+        name: "{{item.a}}"
+        state: "{{item.b }}"
+        update_cache: "{{item.c}}"
+      with_items:
+        - {a: tomcat10,b: present,c: yes}
+        - {a: tomcat10-admin,b: present,c: no}
+    - name: copy the customised file
+      copy: 
+        src: /etc/tomcat10/tomcat-users.xml
+        dest: /tmp/tomcat10
+      notify: Restart tomcat
+  handlers: 
+    - name: Restart tomcat
+      service: 
+        name: tomcat10
+        state: restarted
+...
+

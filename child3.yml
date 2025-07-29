@@ -1,0 +1,6 @@
+---
+- name: fetching the file 
+  fetch:
+    src: /etc/passwd
+    dest: /tmp
+...
